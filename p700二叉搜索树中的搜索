@@ -7,6 +7,8 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
+ //后续遍历
 class Solution {
     TreeNode temp = null;
     public TreeNode searchBST(TreeNode root, int val) {
