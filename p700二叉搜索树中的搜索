@@ -1,0 +1,25 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    TreeNode temp = null;
+    public TreeNode searchBST(TreeNode root, int val) {
+        dfs(root,val);
+        return temp;
+    }
+    public void dfs(TreeNode root,int val){
+        if(root==null||temp!=null) return;
+        if(root.val==val){
+            temp = root;
+            return;
+        }
+        dfs(root.left,val);
+        dfs(root.right,val);
+    }
+}
