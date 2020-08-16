@@ -8,7 +8,7 @@
  * }
  */
  
- //递归
+ //递归 需要用boolean变量
 class Solution {
     boolean flag = false;
     public boolean isBalanced(TreeNode root) {
@@ -24,5 +24,31 @@ class Solution {
         }
         int height = Math.max(left,right)+1;
         return height;
+    }
+}
+
+//用-1代替boolean变量
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return dfs(root)!=-1;
+    }
+    public int dfs(TreeNode root){
+        if(root==null) return 0;
+        int left = dfs(root.left);
+        if(left==-1) return -1;
+        int right = dfs(root.right);
+        if(right == -1 ) return -1;
+        return Math.abs(left-right)<=1?Math.max(left,right)+1:-1;
+    }
+}
+
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null) return true;
+        return Math.abs(dfs(root.left)-dfs(root.right))<=1&&isBalanced(root.left)&&isBalanced(root.right);
+    }
+    public int dfs(TreeNode root){
+        if(root==null) return 0;
+        return Math.max(dfs(root.left),dfs(root.right))+1;
     }
 }
