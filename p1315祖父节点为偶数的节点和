@@ -1,0 +1,48 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+ //没优化的代码
+class Solution {
+    public int sumEvenGrandparent(TreeNode root) {
+        if(root==null) return 0;
+        return dfs(root);
+    }
+    public int dfs(TreeNode root){
+        if(root==null) return 0;
+        int sum = 0;
+        if(root.val%2==0) sum = sum(root.left)+sum(root.right);
+        return sum+dfs(root.left)+dfs(root.right);
+    }
+    public int sum(TreeNode root){
+        if(root==null) return 0;
+        int left=0;
+        int right =0;
+        if(root.left!=null)  left= root.left.val;
+        if(root.right!=null) right =  root.right.val;
+        return left+right;
+    }
+}
+
+
+//将上面代码优化了一下
+class Solution {
+    public int sumEvenGrandparent(TreeNode root) {
+        if(root==null) return 0;
+        return dfs(root);
+    }
+    public int dfs(TreeNode root){
+        if(root==null) return 0;
+        return (root.val&1)==0?sum(root.left)+sum(root.right)+dfs(root.left)+dfs(root.right):dfs(root.left)+dfs(root.right);
+    }
+    public int sum(TreeNode root){
+        if(root==null) return 0;
+        return (root.left!=null?root.left.val:0)+(root.right!=null?root.right.val:0);
+    }
+}
